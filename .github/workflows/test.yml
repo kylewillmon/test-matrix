@@ -21,6 +21,7 @@ jobs:
         if: ${{ matrix.fail }}
         run: exit 1
   next:
+    if: always()
     needs: build
     runs-on: ubuntu-latest
     steps:
