@@ -16,10 +16,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Fail the build
-        if: ${{ matrix.fail }}
-        run: exit 1
   next:
     if: always()
     needs: build
