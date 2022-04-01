@@ -1,0 +1,28 @@
+name: Test
+on:
+  push:
+    branches: [development]
+  pull_request:
+    branches: [development]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        fail: [true, false]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Fail the build
+        if: ${{ matrix.fail }}
+        run: exit 1
+  next:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show status
+        run: echo '${{ toJSON(needs.build) }}'
