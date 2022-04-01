@@ -25,5 +25,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Show status
-        run: echo '${{ toJSON(needs.build) }}'
+      - if: needs.build.result != 'success'
+        name: Fail the build
+        run: exit 1
