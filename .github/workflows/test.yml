@@ -20,6 +20,10 @@ jobs:
       - name: Fail the build
         if: ${{ matrix.fail }}
         run: exit 1
+
+      - name: Do something
+        if: ${{ always() }}
+        run: echo "Do something here"
   next:
     if: always()
     needs: build
